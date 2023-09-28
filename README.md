@@ -9,7 +9,7 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/bellaloc/weather-dashboard.git
+git clone https://github.com/bellaloc/weather
 Open the index.html file in your web browser.
 
 Usage
