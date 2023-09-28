@@ -34,14 +34,17 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
             .then(response => response.json())
             .then(data => {
-                const forecastList = data.list;
+           
                 let forecastHTML = '<h2>5-Day Forecast</h2>';
-                for (const item of forecastList) {
-                    const date = item.dt_txt.split(' ')[0];
-                    const temperature = Math.round(item.main.temp - 273.15); 
-                    const humidity = item.main.humidity;
-                    const windSpeed = item.wind.speed;
-                    const weatherIcon = item.weather[0].icon;
+               
+                for (let i = 0; i <data.list.length; i+= 8) {
+                    const date = data.list[i].dt_txt.split(' ')[0];
+                    const temperature = Math.round(data.list[i].main.temp - 273.15); 
+                    const humidity = data.list[i].main.humidity;
+                    const windSpeed = data.list[i].wind.speed;
+                    const weatherIcon = data.list[i].weather[0].icon;
+
+                    console.log (data.list[i])
 
                     forecastHTML += `
                         <div class="forecast-item">

@@ -1,63 +1,59 @@
+body, h1, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #23408E;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.current-weather {
+        background-color: #6ec0b5;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    } 
+
+
+.current-city {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 .container {
     position: relative;
-    width: 100%;
+    width: 30%;
     height: 100vh;
     overflow: hidden;
-}
-
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: background-color 2s ease-in-out;
-}
-
-.content {
-    padding: 20px;
+    display: inline-block;
     text-align: center;
-    position: relative;
-    z-index: 1;
+    margin: 0 auto;
 }
 
-
-.day .background {
-    background-color: #87CEEB;
+.search-box, .search-history {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
-.night .background {
-    background-color: #000; 
+.forecast {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    border: 1px solid #7f77c9;
+    padding: 50px;
+    box-sizing: border-box;
 }
 
-
-.day-to-night .background {
-    background-color: #000; 
-    animation: dayToNight 2s ease-in-out forwards;
-}
-
-
-.night-to-day .background {
-    background-color: #87CEEB;
-    animation: nightToDay 2s ease-in-out forwards;
-}
-
-
-@keyframes dayToNight {
-    from {
-        background-color: #87CEEB; 
-    }
-    to {
-        background-color: #000; 
-    }
-}
-
-@keyframes nightToDay {
-    from {
-        background-color: #000; 
-    }
-    to {
-        background-color: #87CEEB; 
-    }
+.forecast-item {
+    background-color: #6e8ac7;
 }
