@@ -1,5 +1,5 @@
-## Weather
-## Weather-App-Homework
+# Weather-App-Homework
+
 Weather Dashboard This Weather Dashboard application allows users to check the current weather and a 5-day forecast for a specific city.
 
 Getting Started
