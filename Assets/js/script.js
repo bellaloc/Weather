@@ -2,10 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const apiKey = "b29b4ebde9931d7ca1a89fb2facde3c9";
     const cityInput = document.getElementById("cityInput");
     const searchButton = document.getElementById("searchButton");
+    const clearHistoryButton = document.getElementById("clearHistoryButton");
     const currentWeather = document.querySelector(".current-weather");
     const forecast = document.querySelector(".forecast");
     const searchHistory = document.querySelector(".search-history");
-    let searchHistoryData = [];
+    let searchHistoryData = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
     function fetchCurrentWeather(city) {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
@@ -16,9 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 const humidity = data.main.humidity;
                 const windSpeed = data.wind.speed;
                 const weatherIcon = data.weather[0].icon;
+                const currentTime = new Date(data.dt * 1000);
+                const formattedTime = currentTime.toLocaleString();
 
                 currentWeather.innerHTML = `
                     <h2>Current Weather in ${cityName}</h2>
+                    <p>Time: ${formattedTime}</p>
                     <p>Temperature: ${temperature}°C</p>
                     <p>Humidity: ${humidity}%</p>
                     <p>Wind Speed: ${windSpeed} m/s</p>
@@ -34,17 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
             .then(response => response.json())
             .then(data => {
-           
                 let forecastHTML = '<h2>5-Day Forecast</h2>';
-               
-                for (let i = 0; i <data.list.length; i+= 8) {
+
+                for (let i = 0; i < data.list.length; i += 8) {
                     const date = data.list[i].dt_txt.split(' ')[0];
-                    const temperature = Math.round(data.list[i].main.temp - 273.15); 
+                    const temperature = Math.round(data.list[i].main.temp - 273.15);
                     const humidity = data.list[i].main.humidity;
                     const windSpeed = data.list[i].wind.speed;
                     const weatherIcon = data.list[i].weather[0].icon;
-
-                    console.log (data.list[i])
 
                     forecastHTML += `
                         <div class="forecast-item">
@@ -74,12 +75,14 @@ document.addEventListener("DOMContentLoaded", function () {
         searchHistory.innerHTML = "";
 
         searchHistoryData.forEach(city => {
-            const historyItem = document.createElement("button");
-            historyItem.textContent = city;
-            historyItem.addEventListener("click", () => {
+            const historyItem = document.createElement("li");
+            const historyButton = document.createElement("button");
+            historyButton.textContent = city;
+            historyButton.addEventListener("click", () => {
                 cityInput.value = city;
                 searchButton.click();
             });
+            historyItem.appendChild(historyButton);
             searchHistory.appendChild(historyItem);
         });
     }
@@ -93,11 +96,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    clearHistoryButton.addEventListener("click", function () {
+        searchHistoryData = [];
+        localStorage.removeItem("searchHistory");
+        displaySearchHistory();
+    });
+
     searchHistoryData = JSON.parse(localStorage.getItem("searchHistory")) || [];
     displaySearchHistory();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    function clearSearchHistory() {
+        searchHistoryData = [];
+        localStorage.removeItem("searchHistory");
+        displaySearchHistory();
+    }
+
     const isDaytime = () => {
         const now = new Date();
         const hours = now.getHours();
@@ -113,20 +128,4 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleDayNightTheme();
 
     setInterval(toggleDayNightTheme, 60000);
-
-
-    let searchHistoryData = JSON.parse(localStorage.getItem("searchHistory"));
-    const searchHistory = document.querySelector(".search-history");
-
-    if (searchHistoryData) {
-        searchHistoryData.forEach(city => {
-            const historyItem = document.createElement("button");
-            historyItem.textContent = city;
-            historyItem.addEventListener("click", () => {
-                cityInput.value = city;
-                searchButton.click();
-            });
-            searchHistory.appendChild(historyItem);
-        });
-    }
 });

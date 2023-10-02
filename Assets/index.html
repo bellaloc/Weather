@@ -11,26 +11,16 @@
         <h1>Weather Dashboard</h1>
     </header>
     <div class="search-container">
-        <input type="text" id="cityInput" placeholder="Enter city name">
-        <button id="searchButton">Search</button>
+        <div class="search-input">
+            <input type="text" id="cityInput" placeholder="Enter city name">
+            <button id="searchButton">Search</button>
+            <button id="clearHistoryButton">Clear Search History</button>
+        </div>
+        <ul class="search-history"></ul>
     </div>
     <div class="weather-info">
-        <div class="current-weather">
-           
-        </div>
-        <div class="forecast">
-         
-        </div>
-    </div>
-    <div class="search-history">
-       
-    </div>
-
-    <div class="container">
-        <div class="background"></div>
-        <div class="content">
-        
-        </div>
+        <div class="current-weather"></div>
+        <div class="forecast"></div>
     </div>
 
     <script src="js/script.js"></script> 

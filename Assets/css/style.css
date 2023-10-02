@@ -57,3 +57,28 @@ body, h1, ul {
 .forecast-item {
     background-color: #6e8ac7;
 }
+
+
+.sidebar {
+    width: 30%;
+    float: left;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.content {
+    width: 70%;
+    float: left;
+    padding: 20px;
+}
+
+.search-history {
+    list-style-type: none;
+    padding: 0;
+}
+
+.search-history li {
+    margin-bottom: 10px;
+}
+
