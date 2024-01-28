@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const apiKey = "b29b4ebde9931d7ca1a89fb2facde3c9";
+    const apiKey = "b29b4ebde9931d7ca1a89fb2facde3c99fb2facde3c9";
     const cityInput = document.getElementById("cityInput");
     const searchButton = document.getElementById("searchButton");
     const clearHistoryButton = document.getElementById("clearHistoryButton");
